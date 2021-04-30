@@ -21,7 +21,9 @@ However, we can use Naïve Bayes to solve this problem. The main idea behind Na�
 
 As a result of applying Naïve Bayes, we can reduce the number of values we have to find from 2^(n+2) to (2n+2) which drastically improves the efficiency of the process, making the algorithm feasible.
 
-- Where n is the dimensionality of the feature vector
+- Where n is the dimensionality of the feature vector (also known as the query vector)
+
+Using Naïve Bayes, we can get the probability of a class given a feature vector. We can then compare the probabilities of each class and choose the class that has the greatest probability to be the one classified for the given feature vector. The rule for choosing the class is know as the `maximum a posterior` decision rule
 
 ## Part 1 - Spam Filtering
 
