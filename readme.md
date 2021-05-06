@@ -27,6 +27,48 @@ Using Naïve Bayes, we can get the probability of a class given a feature vector
 
 The classifiers used in this assignment are the same for the Spam Filtering and Digit Classification sections as I made the class 'MyClassifier' generalised such that it can perform the machine learning for any number of classes. This is enabled as a result of the assumption that the data is modelled by a multinomial distritution. _To change the number of classes which are to be identified, pass the an argument 'k' with an integer value denoting the number of classes when you instantiate the MyClassifier class._
 
-## Part 1 - Spam Filtering
+## Function - _estimate_log_class_priors()_
+
+This function takes an input of an n-length numpy array and outputs the log of the priors of each class.
+
+In layman terms, this means that it counts the number of times each class occurs in the dataset and divides that value by the total length of the dataset. This gives the probability of a class, so we simply perform a log function over the array to get the log of the probabilities to get the _log_class_priors_.
+
+## Function - _estimate_log_class_conditional_likelihoods()_
+
+This function takes three inputs:
+
+1. _input_data_ --- which is a dataset of n samples and m features (i.e. does a word occur in a message, or is a pixel white or black in this location)
+2. _labels_ --- which is a dataset of n samples corresponding to the class labels of each row in _input_data_
+3. _alpha_ --- which is a hyperparameter for tuning the effect of the laplace smoothing
+
+For each of the classses, the function calcualtes **log(P( w_i | c ))**. This means that the fucntion calculates the log of the probabilty of a feature given a class label.
+
+To calculate this, I first isolate _input_data_ into sub-datasets, of which each sub-dataset corresponds to the rows of _input_data_ which are given a specific label (e.g. separate _input_data_ into the rows given the label 'ham' and into the rows given the label 'spam').
+
+I next calculate the class conditional likelihoods of each feature by counting the number of times a feature appears for a given class, adding alpha (the hyperparameter) and then dividing the result by the total number of rows with said given class label plus alpha times the number of features in the dataset.
+
+- The use of alpha enables **laplace smoothing**
+- **Laplace smoothing** is necessary because of the use of the multinomial distribution
+- For example, if one of our features does not ever occur in our dataset, without the use of laplace smoothing it would have a probability of zero.
+- This is very unlikely to be accurate and is more likely to be a result of not using a large enough dataset for the training of the model
+- Using **laplace smoothing** allows us to change the probability from zero to a very small probability (e.g. 0.001) and stops the program from essentially eliminating one of the features
+
+Finally, I find the log of each of the class conditional likelihoods and return the array containing the values, called theta.
+
+## Function - _train()_
+
+This function simply calls the two above-mentioned functions with the training data and sets the class fields (of MyClassifier) '_log_class_priors_' and '_theta_' equal to the respective outputs of the functions _estimate_log_class_priors_ and _estimate_log_conditional_likelihoods_.
+
+This sets the class up with the necessary data to perform the predictions in the next function.
+
+## Function - _predict()_
+
+The predict function is a given an input of test data with a shape of (n_samples x m_features). It then loops through each row in the test data and finds the features which are present in the row and selects the respective probabilties of those features.
+
+All the probabilities for the are summed together (called the _row_class_conditional_likelihoods_sum_), before being added to _log_class_priors_ to get the probabilitity of that the row corresponds to each class.
+
+Finally the class which has the highest probability (argmax from the above calculations) is added to a _class_predictions_ array and then the next row is inspected.
+
+The beauty of using logs of the probabilities in each of the steps of the machine learning algorithm is that we only need to add the probabilities at the end (as opposed to timesing them) due to the laws of logarithms.
 
 ## Part 2 - Digit Classification and Feature Engineering
