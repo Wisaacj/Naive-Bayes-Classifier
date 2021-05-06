@@ -25,6 +25,8 @@ As a result of applying Naïve Bayes, we can reduce the number of values we have
 
 Using Naïve Bayes, we can get the probability of a class given a feature vector. We can then compare the probabilities of each class and choose the class that has the greatest probability to be the one classified for the given feature vector. The rule for choosing the class is know as the `maximum a posterior` decision rule.
 
+The classifiers used in this assignment are the same for the Spam Filtering and Digit Classification sections as I made the class 'MyClassifier' generalised such that it can perform the machine learning for any number of classes. This is enabled as a result of the assumption that the data is modelled by a multinomial distritution. _To change the number of classes which are to be identified, pass the an argument 'k' with an integer value denoting the number of classes when you instantiate the MyClassifier class._
+
 ## Part 1 - Spam Filtering
 
 ## Part 2 - Digit Classification and Feature Engineering
