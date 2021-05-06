@@ -2,7 +2,9 @@
 
 This project is a coursework for the Artificial Intelligence module of first year Computer Science at the University of Bath.
 
-For our implementation of the classifier, we have chosen to use the Naïve Bayes approach as the solution is both satisfyingly elegant and produces high accuracy results.
+For our implementation of the classifier, we have chosen to use the Naïve Bayes approach as the solution is both satisfyingly elegant and produces high accuracy results. Our classifier is able to predict classes for **both** the Spam Filtering system and the Digit Recognition system.
+
+---
 
 ## Overview of the Classifier
 
@@ -26,6 +28,8 @@ As a result of applying Naïve Bayes, we can reduce the number of values we have
 Using Naïve Bayes, we can get the probability of a class given a feature vector. We can then compare the probabilities of each class and choose the class that has the greatest probability to be the one classified for the given feature vector. The rule for choosing the class is known as the `maximum a posterior` decision rule.
 
 The classifiers used in this assignment are the same for btoh the Spam Filtering and Digit Classification sections as we made the class 'MyClassifier' generalised such that it can perform the machine learning for any number of classes. This is enabled as a result of the assumption that the data is modelled by a multinomial distribution. _To change the number of classes which are to be identified, pass the an argument 'k' with an integer value denoting the number of classes when you instantiate the **MyClassifier** class._
+
+---
 
 ## Function - _estimate_log_class_priors()_
 
@@ -70,6 +74,14 @@ All the probabilities for the row are then summed together (called the _row_clas
 Finally, the class which has the highest probability (argmax from the above calculations) is added to a _class_predictions_ array and then the next row is inspected.
 
 The beauty of using logs of probabilities in each of the steps of the machine learning algorithm is that we only need to add the probabilities when it comes to calculating the predictions (as opposed to getting the products of them) due to the laws of logarithms.
+
+---
+
+## Discussion of the results
+
+With our implemenation of a Naïve Bayes classifier and setting alpha equal to 100 (the hyper-parameter used in **laplace smoothing**), we were able to achieve an accuracy of 0.89, or 89% for the spam filtering system and 0.493, or 49.3% for the digit recognition system using the test data provided.
+
+We believe that these are high results and the only way for them to be improved upon (in our opinion) is by implementing a better feature extractor in the digit recognition system. 
 
 # Conclusion
 
