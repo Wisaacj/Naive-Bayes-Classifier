@@ -1,6 +1,6 @@
 # Naïve Bayes Classifier
 
-This project is a coursework for the Artificial Intelligence module of first year Computer Science at the University of Bath.
+This project is a coursework for the first year Artificial Intelligence module at the University of Bath.
 
 For our implementation of the classifier, we have chosen to use the Naïve Bayes approach as the solution is both satisfyingly elegant
 and produces high accuracy results. Our classifier is able to predict classes for **both** the Spam Filtering system and the Digit Recognition system.
